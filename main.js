@@ -22,15 +22,83 @@
     dataObj.content = fiveMinText.value;
     dataList.push(dataObj);
     localStorage.task = JSON.stringify(dataList);
+
+    // リストに要素を追加
+    if (fiveMinText.value.trim() === "") return;
     const li = document.createElement("li");
-    li.textContent = fiveMinText.value;
-    document.querySelector("#fiveMinList").appendChild(li);
-
-    fiveMinText.value = "";
-
     const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
     li.appendChild(checkbox).classList.add("checkbox");
+    checkbox.type = "checkbox";
+    checkbox.name = "tasks";
+    li.appendChild(checkbox);
+
+    const p = document.createElement("p");
+    p.textContent = fiveMinText.value;
+    li.appendChild(p);
+
+    const moveToToday = document.createElement("button");
+    moveToToday.classList.add("today");
+    moveToToday.textContent = "→today";
+    li.appendChild(moveToToday);
+    // リスト移動============================================
+    moveToToday.addEventListener("click", () => {
+      console.log("today");
+      p.closest("li").remove();
+      // ul
+      const li = document.createElement("li");
+      const checkbox = document.createElement("input");
+      li.appendChild(checkbox).classList.add("checkbox");
+      checkbox.type = "checkbox";
+      checkbox.name = "tasks";
+      li.appendChild(checkbox);
+
+      const content = document.createElement("p");
+      content.textContent = p.textContent;
+      li.appendChild(p);
+      // 5分リストへの移動ボタン
+      const moveToFiveMin = document.createElement("button");
+      moveToFiveMin.classList.add("fiveMin");
+      moveToFiveMin.textContent = "→5min";
+      li.appendChild(moveToFiveMin);
+      // 明日以降リストへの移動ボタン
+      const moveToTomorrow = document.createElement("button");
+      moveToTomorrow.classList.add("tomorrow");
+      moveToTomorrow.textContent = "→tmr";
+      li.appendChild(moveToTomorrow);
+
+      // ulに追加
+      const ul = document.querySelector("#todayList");
+      ul.appendChild(li);
+      todayText.value = "";
+    });
+
+    const moveToTomorrow = document.createElement("button");
+    moveToTomorrow.classList.add("tomorrow");
+    moveToTomorrow.textContent = "→tmr";
+    li.appendChild(moveToTomorrow);
+
+    // ulに追加
+    const ul = document.querySelector("#fiveMinList");
+    ul.appendChild(li);
+    fiveMinText.value = "";
+    console.log(li);
+    // =============================================================
+
+    // ダブルクリックで完了リストに移動
+    p.addEventListener("dblclick", () => {
+      p.closest("li").remove();
+      // ul
+      const ul = document.querySelector("#completed");
+      const li = document.createElement("li");
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.name = "tasks";
+      li.appendChild(checkbox).classList.add("checkbox");
+      const content = document.createElement("p");
+      content.textContent = p.textContent;
+      li.appendChild(content);
+      ul.appendChild(li);
+    });
   });
 
   todayBtn.addEventListener("click", () => {
@@ -42,14 +110,48 @@
     dataList.push(dataObj);
     localStorage.task = JSON.stringify(dataList);
 
+    if (todayText.value.trim() === "") return;
     const li = document.createElement("li");
-    document.querySelector("#todayList").appendChild(li);
-    li.textContent = todayText.value;
+    const checkbox = document.createElement("input");
+    li.appendChild(checkbox).classList.add("checkbox");
+    checkbox.type = "checkbox";
+    checkbox.name = "tasks";
+    li.appendChild(checkbox);
+
+    const p = document.createElement("p");
+    p.textContent = todayText.value;
+    li.appendChild(p);
+    // 5分リストへの移動ボタン
+    const moveToFiveMin = document.createElement("button");
+    moveToFiveMin.classList.add("fiveMin");
+    moveToFiveMin.textContent = "→5min";
+    li.appendChild(moveToFiveMin);
+    // 明日以降リストへの移動ボタン
+    const moveToTomorrow = document.createElement("button");
+    moveToTomorrow.classList.add("tomorrow");
+    moveToTomorrow.textContent = "→tmr";
+    li.appendChild(moveToTomorrow);
+
+    // ulに追加
+    const ul = document.querySelector("#todayList");
+    ul.appendChild(li);
     todayText.value = "";
 
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    li.appendChild(checkbox).classList.add("checkbox");
+    // ダブルクリックでリスト移動
+    p.addEventListener("dblclick", () => {
+      p.closest("li").remove();
+      // ul
+      const ul = document.querySelector("#completed");
+      const li = document.createElement("li");
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.name = "tasks";
+      li.appendChild(checkbox).classList.add("checkbox");
+      const content = document.createElement("p");
+      content.textContent = p.textContent;
+      li.appendChild(content);
+      ul.appendChild(li);
+    });
   });
 
   tomorrowBtn.addEventListener("click", () => {
@@ -61,24 +163,80 @@
     dataList.push(dataObj);
     localStorage.task = JSON.stringify(dataList);
 
+    if (tomorrowText.value.trim() === "") return;
     const li = document.createElement("li");
-    document.querySelector("#tomorrowList").appendChild(li);
-    li.textContent = tomorrowText.value;
+    const checkbox = document.createElement("input");
+    li.appendChild(checkbox).classList.add("checkbox");
+    checkbox.type = "checkbox";
+    checkbox.name = "tasks";
+    li.appendChild(checkbox);
+
+    const p = document.createElement("p");
+    p.textContent = tomorrowText.value;
+    li.appendChild(p);
+    // 5分リストへの移動ボタン
+    const moveToFiveMin = document.createElement("button");
+    moveToFiveMin.classList.add("fiveMin");
+    moveToFiveMin.textContent = "→5min";
+    li.appendChild(moveToFiveMin);
+    // 今日中リストへの移動ボタン
+    const moveToToday = document.createElement("button");
+    moveToToday.classList.add("today");
+    moveToToday.textContent = "→today";
+    li.appendChild(moveToToday);
+
+    // ulに追加
+    const ul = document.querySelector("#tomorrowList");
+    ul.appendChild(li);
     tomorrowText.value = "";
 
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    li.appendChild(checkbox).classList.add("checkbox");
+    // ダブルクリックでリスト移動
+    p.addEventListener("dblclick", () => {
+      p.closest("li").remove();
+      // ul
+      const ul = document.querySelector("#completed");
+      const li = document.createElement("li");
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.name = "tasks";
+      li.appendChild(checkbox).classList.add("checkbox");
+      const content = document.createElement("p");
+      content.textContent = p.textContent;
+      li.appendChild(content);
+      ul.appendChild(li);
+    });
   });
 
-  deleteBtn.addEventListener("click", () => {
-    const tasks = document.querySelectorAll("checkbox");
-    console.log(tasks);
-    // tasks.checked = true;
-    if (tasks.checked === true) {
-      tasks.classList.add("checked");
+  function deleteRow() {
+    const checkedList = document.querySelectorAll("input[name =tasks]:checked");
+    console.log(checkedList);
+    if (checkedList.length === 0) {
+      return;
     }
+    if (!confirm("削除しますか？")) {
+      return;
+    }
+    checkedList.forEach((check) => check.closest("li").remove());
+  }
+
+  // const li = document.createElement("li");
+  // document.querySelector("#tomorrowList").appendChild(li);
+  // li.textContent = tomorrowText.value;
+  // tomorrowText.value = "";
+
+  // const checkbox = document.createElement("input");
+  // checkbox.type = "checkbox";
+  // li.appendChild(checkbox).classList.add("checkbox");
+
+  deleteBtn.addEventListener("click", () => {
+    //   const fiveMinList = document.querySelector("#fiveMinList");
+
+    deleteRow();
   });
+
+  // 選択したタスクをすべて削除
+
+  // ダブルクリックでcompリストに移動
 
   // 登録ボタンクリック時のイベント
 
