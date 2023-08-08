@@ -1,106 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css" />
-    <title>ToDo</title>
+    <title>Todo</title>
   </head>
-
   <body>
     <main>
-      <h1>ToDo List</h1>
-      <div class="forms">
-        <!-- <p>5min</p> -->
-        <div class="form">
-          <input type="text" placeholder="5min" id="fiveMinText" />
-          <button id="fiveMinBtn">
-            <span class="material-symbols-outlined"> add </span>
-          </button>
-        </div>
-        <!-- <p>Today</p> -->
-        <div class="form">
-          <input type="text" placeholder="Today" id="todayText" />
-          <button id="todayBtn">
-            <span class="material-symbols-outlined"> add </span>
-          </button>
-        </div>
-        <!-- <p>After tomorrow</p> -->
-        <div class="form">
-          <input type="text" placeholder="After tomorrow" id="tomorrowText" />
-          <button id="tomorrowBtn">
-            <span class="material-symbols-outlined"> add </span>
-          </button>
-        </div>
+      <h1>Todo List</h1>
+      <form id="add-form">
+        <input type="text" id="textArea" />
+        <button><span class="material-symbols-outlined"> add </span></button>
+      </form>
+      <div class="btns">
+        <button id="all">All</button>
+        <button id="active">Active</button>
+        <button id="comp">Completed</button>
+        <button id="purge">Delete checked item</button>
       </div>
-      <!-- <p>Pure time 9:00-12:00/13:00-17:00</p> -->
-      <!-- タイマーで実装 -->
-      <!-- <div class="container">
-      <p class="time"><span id="hour"></span>:</p>
-      <p class="time"><span id="min"></span>left</p>
-      <p class="time"><span id="sec"></span></p>
-      </div> -->
-
-      <button id="deleteBtn">Delete checked item</button>
 
       <div class="tasks">
-        <h2>All tasks</h2>
-        <button>Download</button>
-        <div class="urgent">
-          <div id="fiveMin">
-            <h3>5min</h3>
-            <ul id="fiveMinList"></ul>
-          </div>
-
-          <div id="today">
-            <h3>Today</h3>
-            <ul id="todayList"></ul>
-          </div>
-        </div>
-        <!-- urgent -->
-
-        <div id="tomorrow">
-          <h3>After tomorrow</h3>
-          <ul id="tomorrowList"></ul>
-        </div>
-
-        <div id="completed">
-          <h3>completed</h3>
-          <ul></ul>
-        </div>
+        <ul id="todos"></ul>
       </div>
-      <!-- tasks -->
-
-      <!-- <div id="input">
-        <label>TODO: <input id="todo" /></label><br />
-        優先度:
-        <select>
-          <option>低</option>
-          <option selected>普</option>
-          <option>高</option>
-        </select>
-        <label>期日: <input type="date" /></label><br />
-        <button id="submit">登録</button>
-      </div>
-
-      <table>
-        <tr>
-          <th id="todoLabel">TODO</th>
-          <th>優先度</th>
-          <th id="dateLabel">期日</th>
-          <th>完了</th>
-        </tr>
-      </table> -->
     </main>
     <script src="main.js"></script>
   </body>
